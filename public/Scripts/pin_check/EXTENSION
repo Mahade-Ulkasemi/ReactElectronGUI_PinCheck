@@ -1,0 +1,13 @@
+VERILOG = {
+	.v
+}
+
+LEF = { 
+	.lef, 
+	.lef_*
+}
+
+LIB = { 
+	.lib,
+	.lib_*
+}
