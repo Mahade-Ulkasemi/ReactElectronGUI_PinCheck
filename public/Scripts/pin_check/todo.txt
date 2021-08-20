@@ -1,6 +1,0 @@
-kill function > on err handle
-empty form sumbit > error window show  >> done
-stop button press before process creation > need to handle >> done
-hang when kill child process
-report show button >> done
-color text on terminal

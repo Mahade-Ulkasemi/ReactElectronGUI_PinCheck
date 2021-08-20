@@ -285,11 +285,24 @@ function createWindow() {
         }
 
         ptyChildProcess.stdout.on("data", (data) => {
-          event.sender.send("terminal.log", data);
+          dataString = data.toString();
+          if (dataString.match(/info/gi)) {
+            // console.log("info found");
+            event.sender.send("terminal.log", "\x1b[0;30m" + data);
+          } else if (dataString.match(/warning/gi)) {
+            event.sender.send("terminal.log", "\x1b[0;33m" + data);
+          } else if (dataString.match(/error/gi)) {
+            event.sender.send("terminal.log", "\x1b[1;31m" + data);
+          } else {
+            event.sender.send("terminal.log", data);
+          }
+
+          // event.sender.send("terminal.log", data);
         });
 
         ptyChildProcess.stderr.on("data", (data) => {
-          event.sender.send("terminal.log", data);
+          event.sender.send("terminal.log", "\x1b[1;31m" + data);
+          // event.sender.send("terminal.log", data);
         });
 
         ptyChildProcess.on("close", (code) => {
